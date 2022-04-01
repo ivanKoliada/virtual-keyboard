@@ -587,7 +587,7 @@ header .container nav ul li a.active-link {
 }
 
 footer {
-  background: url(/assets/img/noise_transparent@2x.png), radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 100%), #211f20;
+  background: url(./../../assets/img/noise_transparent@2x.png), radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 100%), #211f20;
 }
 
 footer .container {
@@ -685,7 +685,6 @@ footer .container .footer-text .footer-address .location p {
 
 footer .container .footer-image {
   width: 30rem;
-  height: 31rem;
 }
 
 footer .container .footer-image img {
@@ -734,7 +733,6 @@ footer .container .footer-image img {
   }
   footer .container .footer-image {
     width: 26rem;
-    height: 26.9rem;
   }
   footer .container .footer-image img {
     width: 100%;

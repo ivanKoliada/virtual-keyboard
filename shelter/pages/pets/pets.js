@@ -15,7 +15,7 @@ const pets = [
   {
     id: "1",
     name: "Sophia",
-    img: "/../../assets/img/pets-sophia.png",
+    img: "./../../assets/img/pets-sophia.png",
     type: "Dog",
     breed: "Shih tzu",
     description:
@@ -28,7 +28,7 @@ const pets = [
   {
     id: "2",
     name: "Woody",
-    img: "/../../assets/img/pets-woody.png",
+    img: "./../../assets/img/pets-woody.png",
     type: "Dog",
     breed: "Golden Retriever",
     description:
