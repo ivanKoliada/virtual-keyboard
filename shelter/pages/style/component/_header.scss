@@ -1,0 +1,164 @@
+header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    & .container {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+        position: absolute;
+        & .header-logo {
+            & .title {
+                text-decoration: none;
+                @include font(
+                    $size: $text32,
+                    $line: $line110,
+                    $color: $colorTextPrimary
+                );
+                letter-spacing: 0.06em;
+            }
+            & .subtitle {
+                padding-top: 1rem;
+                padding-left: 0.4rem;
+                font-family: Arial;
+                @include font(
+                    $size: $text13,
+                    $line: 1.5rem,
+                    $color: $colorTextWhite
+                );
+                letter-spacing: 0.1em;
+            }
+        }
+        & .header-burger {
+            display: none;
+        }
+        & .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10049;
+            background: rgba(41, 41, 41, 0.6);
+        }
+        & .show {
+            display: block;
+        }
+        & nav ul {
+            @include flexSet;
+            gap: 3.5rem;
+            & li {
+                list-style-type: none;
+                & a {
+                    text-decoration: none;
+                    font-family: Arial;
+                    @include font($line: $line160, $color: $colorTextGrey);
+                    &:hover {
+                        color: $colorTextWhiteLight;
+                        border-bottom: 0.3rem solid $colorBgPrimary;
+                    }
+                }
+                & a.active-link {
+                    color: $colorTextWhiteLight;
+                    border-bottom: 0.3rem solid $colorBgPrimary;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1279px) {
+    header {
+        & .container {
+            padding-top: 3rem;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    header {
+        & .container {
+            & .header-logo {
+                position: absolute;
+                top: 3rem;
+                right: 11.4rem;
+                z-index: 100501;
+            }
+            & .header-burger {
+                top: 4.9rem;
+                right: 4.3rem;
+                display: block;
+                width: 3rem;
+                height: 2.2rem;
+                position: absolute;
+                z-index: 100500;
+
+                & span {
+                    position: absolute;
+                    top: 1rem;
+                    background-color: $colorBgPrimary;
+                    width: 100%;
+                    height: 0.2rem;
+                    transition: all 0.5s ease;
+                }
+                &:after,
+                &:before {
+                    content: "";
+                    position: absolute;
+                    background-color: $colorBgPrimary;
+                    width: 100%;
+                    height: 0.2rem;
+                    transition: all 0.5s ease;
+                }
+                &::after {
+                    top: 2rem;
+                }
+            }
+
+            & .rotate-burger {
+                top: 4.5rem;
+                height: 3rem;
+                & span {
+                    top: 1rem;
+                    left: 0;
+                    transform: rotate(90deg);
+                    background-color: $colorBgPrimary;
+                }
+                &:after,
+                &:before {
+                    top: 1rem;
+                    left: -1rem;
+                    transform: rotate(90deg);
+                    background-color: $colorBgPrimary;
+                }
+                &::after {
+                    top: 1rem;
+                    left: 1rem;
+                }
+            }
+
+            & nav {
+                background-color: $colorBgDark;
+                position: fixed;
+                right: -32rem;
+                top: 0;
+                width: 32rem;
+                height: 100vh;
+                z-index: 10050;
+                transition: all 1s ease;
+                & ul {
+                    padding-top: 25rem;
+                    flex-direction: column;
+                    gap: 4rem;
+
+                    & li a {
+                        font-size: $text32;
+                    }
+                }
+            }
+            & .active-menu {
+                right: 0;
+            }
+        }
+    }
+}

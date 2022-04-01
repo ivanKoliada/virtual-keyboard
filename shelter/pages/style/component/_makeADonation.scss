@@ -1,0 +1,101 @@
+.makeADonation {
+    background: $colorBgGreyLight;
+    & .container {
+        justify-content: center;
+        padding-left: 14.3rem;
+        padding-right: 14.2rem;
+        gap: 3rem;
+        & .makeADonation-text {
+            @include flexSet($direction: column, $align: flex-start);
+            gap: 2rem;
+            & a {
+                text-decoration: none;
+            }
+            & .title {
+                @include titleDark;
+                letter-spacing: 0.06em;
+            }
+            & .subtitle {
+                @include font($size: $text15, $line: $line110);
+                letter-spacing: 0.06em;
+            }
+            & .credit-card {
+                @include buttonPrimary;
+                gap: 1.5rem;
+                width: 34.9rem;
+                height: 4.3rem;
+                border-radius: 0.9rem;
+                &:hover {
+                    background: $colorBgPrimaryLight;
+                }
+                & p {
+                    @include font($size: $text20, $line: $line115);
+                    letter-spacing: 0.06em;
+                }
+            }
+            & .description {
+                font-family: Arial;
+                font-style: italic;
+                font-size: $text12;
+                line-height: 1.8rem;
+                color: $colorTextDarkm;
+            }
+        }
+    }
+}
+
+@media (max-width: 1279px) {
+    .makeADonation {
+        & .container {
+            flex-direction: column-reverse;
+            gap: 6rem;
+            padding-left: 0;
+            padding-right: 0;
+            & .makeADonation-text {
+                padding-left: 16.4rem;
+                padding-right: 16.4rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .makeADonation {
+        // display: none;
+        & .container {
+            gap: 4.2rem;
+            & .makeADonation-image {
+                width: 26rem;
+                height: 13.52rem;
+                & img {
+                    width: 100%;
+                }
+            }
+            & .makeADonation-text {
+                max-width: calc(100% - 2rem);
+                padding-left: 0;
+                padding-right: 0;
+                align-items: center;
+                text-align: center;
+                & .title {
+                    font-size: $text25;
+                }
+                & .subtitle {
+                    line-height: $line160;
+                    letter-spacing: normal;
+                }
+                & .credit-card {
+                    width: 28.1rem;
+                    height: 4.3rem;
+                    & p {
+                        font-size: $text15;
+                        line-height: $line110;
+                    }
+                }
+                & .description {
+                    text-align: justify;
+                }
+            }
+        }
+    }
+}

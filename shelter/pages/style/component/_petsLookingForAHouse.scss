@@ -1,0 +1,94 @@
+.lookingForAHouse {
+    background: $colorBgGreyLight;
+    & .container {
+        flex-direction: column;
+        justify-content: center;
+        gap: 6rem;
+        & .lookingForAHouse-text {
+            text-align: center;
+            @include titleDark;
+            letter-spacing: 0.06em;
+        }
+        & .cards {
+            @include flexSet($wrap: wrap);
+            gap: 3rem;
+            & .card {
+                padding-bottom: 3rem;
+                @include flexSet($direction: column);
+                gap: 3rem;
+                background: $colorBgWhiteLight;
+                border-radius: 0.9rem;
+                &:hover {
+                    cursor: pointer;
+                    background: $colorBgWhite;
+                    box-shadow: 0 0.2rem 3.5rem 1.4rem rgba(13, 13, 13, 0.04);
+                }
+                & p {
+                    @include font($size: $text20, $line: 2.3rem);
+                    letter-spacing: 0.06em;
+                }
+                & button {
+                    @include buttonWhite;
+                    width: 18.7rem;
+                    &:hover {
+                        @include buttonHover;
+                        width: 18.7rem;
+                    }
+                }
+            }
+        }
+        & .pagination {
+            @include flexSet($content: center);
+            gap: 2rem;
+            & button {
+                @include buttonWhite;
+                font-size: $text20;
+                line-height: $line115;
+                width: 5.2rem;
+                &:disabled {
+                    color: $colorTextGrey;
+                    border: 2px solid $colorTextGrey;
+                    cursor: not-allowed;
+                }
+            }
+            & button[data-btn-number] {
+                background: $colorBgPrimary;
+            }
+        }
+    }
+}
+
+@media (max-width: 1279px) {
+    .lookingForAHouse {
+        & .container {
+            width: calc(100% - 18.8rem);
+            gap: 3rem;
+            padding-bottom: 7.6rem;
+            & .pagination {
+                padding-top: 1rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .lookingForAHouse {
+        & .container {
+            padding-top: 4.2rem;
+            padding-bottom: 4.2rem;
+            width: calc(100% - 2rem);
+            gap: 4.2rem;
+            & .lookingForAHouse-text {
+                font-size: $text25;
+            }
+            & .cards {
+                justify-content: center;
+                width: calc(100% - 3rem);
+            }
+            & .pagination {
+                gap: 1rem;
+                padding-top: 0;
+            }
+        }
+    }
+}
