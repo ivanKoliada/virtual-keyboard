@@ -10,10 +10,10 @@
         }
         & .helpOurShelter-cards {
             width: calc(100% - 17.4rem);
-            @include flexSet($wrap: wrap, $content: center);
+            @include flex($wrap: wrap, $content: center);
             gap: 5.5rem 11.9rem;
             & .card {
-                @include flexSet($direction: column, $content: center);
+                @include flex($direction: column, $content: center);
                 gap: 3rem;
                 & p {
                     @include font($size: $text20, $line: $line115);

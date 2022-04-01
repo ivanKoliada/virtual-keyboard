@@ -6,7 +6,7 @@
     height: 100vh;
     background: rgba(41, 41, 41, 0.6);
     & .popup-close {
-        @include flexSet($content: center);
+        @include flex($content: center);
         position: absolute;
         right: -4.2rem;
         top: -5.2rem;
@@ -20,7 +20,7 @@
         }
     }
     & .popup {
-        @include flexSet($align: flex-start);
+        @include flex($align: flex-start);
         position: absolute;
         top: 50%;
         left: 50%;
@@ -47,7 +47,7 @@
             }
             & .description {
                 padding-top: 1rem;
-                @include flexSet($direction: column, $align: flex-start);
+                @include flex($direction: column, $align: flex-start);
                 gap: 4rem;
                 & .type {
                     @include font(

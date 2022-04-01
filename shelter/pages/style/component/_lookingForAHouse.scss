@@ -10,7 +10,7 @@
             letter-spacing: 0.06em;
         }
         & .lookingForAHouse-slider {
-            @include flexSet($content: center);
+            @include flex($content: center);
             gap: 5.3rem;
             & button {
                 @include buttonWhite;
@@ -25,7 +25,7 @@
                 gap: 9rem;
                 & .card {
                     padding-bottom: 3rem;
-                    @include flexSet($direction: column);
+                    @include flex($direction: column);
                     gap: 3rem;
                     background: $colorBgWhiteLight;
                     border-radius: 0.9rem;

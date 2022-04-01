@@ -19,7 +19,7 @@
     @include fontProps($size, $line, $color);
 }
 
-@mixin flexSet(
+@mixin flex(
     $direction: row,
     $content: space-between,
     $align: center,
@@ -35,7 +35,7 @@
 @mixin buttonPrimary {
     @include font($size: $text17, $line: $line130, $color: $colorTextDark);
     letter-spacing: 0.06em;
-    @include flexSet($content: center);
+    @include flex($content: center);
 
     width: 20.7rem;
     height: 5.2rem;

@@ -6,7 +6,7 @@
         padding-right: 14.2rem;
         gap: 3rem;
         & .makeADonation-text {
-            @include flexSet($direction: column, $align: flex-start);
+            @include flex($direction: column, $align: flex-start);
             gap: 2rem;
             & a {
                 text-decoration: none;

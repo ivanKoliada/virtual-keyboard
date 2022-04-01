@@ -10,11 +10,11 @@
             letter-spacing: 0.06em;
         }
         & .cards {
-            @include flexSet($wrap: wrap);
+            @include flex($wrap: wrap);
             gap: 3rem;
             & .card {
                 padding-bottom: 3rem;
-                @include flexSet($direction: column);
+                @include flex($direction: column);
                 gap: 3rem;
                 background: $colorBgWhiteLight;
                 border-radius: 0.9rem;
@@ -38,7 +38,7 @@
             }
         }
         & .pagination {
-            @include flexSet($content: center);
+            @include flex($content: center);
             gap: 2rem;
             & button {
                 @include buttonWhite;

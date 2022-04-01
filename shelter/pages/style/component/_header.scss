@@ -45,7 +45,7 @@ header {
             display: block;
         }
         & nav ul {
-            @include flexSet;
+            @include flex;
             gap: 3.5rem;
             & li {
                 list-style-type: none;
