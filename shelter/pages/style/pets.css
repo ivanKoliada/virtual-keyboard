@@ -90,6 +90,11 @@ header .container {
   position: absolute;
 }
 
+header .container .header-logo {
+  display: block;
+  text-decoration: none;
+}
+
 header .container .header-logo .title {
   text-decoration: none;
   font-size: 3.2rem;
@@ -106,6 +111,10 @@ header .container .header-logo .subtitle {
   line-height: 1.5rem;
   color: #ffffff;
   letter-spacing: 0.1em;
+}
+
+header .container .header-logo:hover {
+  cursor: pointer;
 }
 
 header .container .header-burger {
@@ -274,12 +283,21 @@ header .container {
   padding-bottom: 3rem;
 }
 
+header .container .header-logo {
+  display: block;
+  text-decoration: none;
+}
+
 header .container .header-logo .title {
   color: #545454;
 }
 
 header .container .header-logo .subtitle {
   color: #292929;
+}
+
+header .container .header-logo:hover {
+  cursor: pointer;
 }
 
 header .container nav ul {
@@ -419,6 +437,36 @@ header .container nav ul li a.active-link {
           box-shadow: 0 0.2rem 3.5rem 1.4rem rgba(13, 13, 13, 0.04);
 }
 
+.lookingForAHouse .container .cards .card:hover button {
+  font-size: 1.7rem;
+  line-height: 130%;
+  color: #292929;
+  letter-spacing: 0.06em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 20.7rem;
+  height: 5.2rem;
+  background: #f1cdb3;
+  border-radius: 10rem;
+  border: 0;
+  cursor: pointer;
+  background: #fddcc4;
+  width: 18.7rem;
+}
+
 .lookingForAHouse .container .cards .card p {
   font-size: 2rem;
   line-height: 2.3rem;
@@ -456,36 +504,6 @@ header .container nav ul li a.active-link {
   border: 2px solid #f1cdb3;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  width: 18.7rem;
-}
-
-.lookingForAHouse .container .cards .card button:hover {
-  font-size: 1.7rem;
-  line-height: 130%;
-  color: #292929;
-  letter-spacing: 0.06em;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 20.7rem;
-  height: 5.2rem;
-  background: #f1cdb3;
-  border-radius: 10rem;
-  border: 0;
-  cursor: pointer;
-  background: #fddcc4;
   width: 18.7rem;
 }
 
@@ -543,14 +561,23 @@ header .container nav ul li a.active-link {
   width: 5.2rem;
 }
 
+.lookingForAHouse .container .pagination button:hover {
+  background: #fddcc4;
+}
+
 .lookingForAHouse .container .pagination button:disabled {
   color: #cdcdcd;
   border: 2px solid #cdcdcd;
   cursor: not-allowed;
 }
 
+.lookingForAHouse .container .pagination button:disabled:hover {
+  background: none;
+}
+
 .lookingForAHouse .container .pagination button[data-btn-number] {
   background: #f1cdb3;
+  cursor: auto;
 }
 
 @media (max-width: 1279px) {

@@ -35,6 +35,10 @@
                         box-shadow: 0 0.2rem 3.5rem 1.4rem
                             rgba(13, 13, 13, 0.04);
                     }
+                    &:hover button {
+                        @include buttonHover;
+                        width: 18.7rem;
+                    }
                     & p {
                         @include font($size: $text20, $line: 2.3rem);
                         letter-spacing: 0.06em;
@@ -43,14 +47,15 @@
                         @include buttonWhite;
                         width: 18.7rem;
                         &:hover {
-                            @include buttonHover;
-                            width: 18.7rem;
+                            transform: scale(1.05);
                         }
                     }
                 }
             }
         }
         & .lookingForAHouse-btn {
+            display: block;
+            text-decoration: none;
             @include buttonPrimary;
             width: 26.1rem;
             &:hover {

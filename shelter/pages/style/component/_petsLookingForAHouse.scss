@@ -23,6 +23,10 @@
                     background: $colorBgWhite;
                     box-shadow: 0 0.2rem 3.5rem 1.4rem rgba(13, 13, 13, 0.04);
                 }
+                &:hover button {
+                    @include buttonHover;
+                    width: 18.7rem;
+                }
                 & p {
                     @include font($size: $text20, $line: 2.3rem);
                     letter-spacing: 0.06em;
@@ -30,10 +34,6 @@
                 & button {
                     @include buttonWhite;
                     width: 18.7rem;
-                    &:hover {
-                        @include buttonHover;
-                        width: 18.7rem;
-                    }
                 }
             }
         }
@@ -45,14 +45,21 @@
                 font-size: $text20;
                 line-height: $line115;
                 width: 5.2rem;
+                &:hover {
+                    background: $colorBgPrimaryLight;
+                }
                 &:disabled {
                     color: $colorTextGrey;
                     border: 2px solid $colorTextGrey;
                     cursor: not-allowed;
+                    &:hover {
+                        background: none;
+                    }
                 }
             }
             & button[data-btn-number] {
                 background: $colorBgPrimary;
+                cursor: auto;
             }
         }
     }

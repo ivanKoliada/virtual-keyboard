@@ -269,19 +269,3 @@ contactLink.addEventListener("click", () => {
     openCloseMenu();
   }
 });
-
-// make a friends btn
-
-const makeFriends = document.querySelector(".btnFriends");
-makeFriends.addEventListener(
-  "click",
-  () => (window.location = "./main.html#friends")
-);
-
-// get to know the rest
-
-const getTheRest = document.querySelector(".lookingForAHouse-btn");
-getTheRest.addEventListener(
-  "click",
-  () => (window.location = "./../pets/pets.html")
-);

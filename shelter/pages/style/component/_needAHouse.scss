@@ -24,6 +24,8 @@
                 );
             }
             & .btn {
+                display: block;
+                text-decoration: none;
                 @include buttonPrimary;
                 &:hover {
                     @include buttonHover;

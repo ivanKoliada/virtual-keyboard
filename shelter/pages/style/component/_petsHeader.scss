@@ -11,11 +11,16 @@ header {
         padding-bottom: 3rem;
 
         & .header-logo {
+            display: block;
+            text-decoration: none;
             & .title {
                 color: $colorTextDarkl;
             }
             & .subtitle {
                 color: $colorTextDark;
+            }
+            &:hover {
+                cursor: pointer;
             }
         }
         & nav ul {

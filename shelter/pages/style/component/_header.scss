@@ -7,6 +7,8 @@ header {
         padding-bottom: 6rem;
         position: absolute;
         & .header-logo {
+            display: block;
+            text-decoration: none;
             & .title {
                 text-decoration: none;
                 @include font(
@@ -26,6 +28,9 @@ header {
                     $color: $colorTextWhite
                 );
                 letter-spacing: 0.1em;
+            }
+            &:hover {
+                cursor: pointer;
             }
         }
         & .header-burger {
