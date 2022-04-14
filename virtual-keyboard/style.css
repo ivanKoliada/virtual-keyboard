@@ -43,6 +43,11 @@
     position: relative;
 }
 
+.keyboard__key:active {
+    animation: click 1.5s 1;
+    /* background: #7c88bd; */
+}
+
 .keyboard__key--xs {
     width: 4%;
     max-width: 90px;
@@ -71,4 +76,28 @@
     width: 23%;
     max-width: 500px;
     background: rgba(180, 176, 176, 0.5);
+}
+
+.keyboard__key--active {
+    animation: click 1s 1;
+    /* background: #7c88bd; */
+}
+
+@keyframes click {
+    0% {
+        transform: scale(1);
+        background: rgba(255, 255, 255, 0.3);
+    }
+    25% {
+        transform: scale(1.1);
+        background: #7c88bd;
+    }
+    50% {
+        transform: scale(1.2);
+        background: #7c88bd;
+    }
+    100% {
+        transform: scale(1);
+        background: rgba(255, 255, 255, 0.3);
+    }
 }
