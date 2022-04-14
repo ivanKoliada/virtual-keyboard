@@ -120,6 +120,11 @@ class Keyboard {
         case "Backspace":
           keyElement.classList.add("keyboard__key--xl");
           keyElement.textContent = char;
+          keyElement.addEventListener("click", () => {
+            this.elements.keyboardInput.value =
+              this.elements.keyboardInput.value.slice(0, -1);
+          });
+
           break;
         case "Tab":
           keyElement.classList.add("keyboard__key--s");
@@ -143,6 +148,9 @@ class Keyboard {
         case "Enter":
           keyElement.classList.add("keyboard__key--xl");
           keyElement.textContent = char;
+          keyElement.addEventListener("click", () => {
+            this.elements.keyboardInput.value += "\n";
+          });
           break;
         case "Shift":
           keyElement.classList.add("keyboard__key--xl");
@@ -171,6 +179,9 @@ class Keyboard {
         case "Space":
           keyElement.classList.add("keyboard__key--xxl");
           keyElement.textContent = char;
+          keyElement.addEventListener("click", () => {
+            this.elements.keyboardInput.value += " ";
+          });
           break;
         case "Alt":
           keyElement.classList.add("keyboard__key--xs");
@@ -195,10 +206,11 @@ class Keyboard {
         default:
           keyElement.textContent = char.toLowerCase();
           keyElement.addEventListener("click", () => {
-            this.properties.value += this.properties.capsLock
+            this.elements.keyboardInput.value += this.properties.capsLock
               ? char.toUpperCase()
               : char.toLowerCase();
           });
+
           break;
       }
       fragment.appendChild(keyElement);
