@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background: #232323;
+    /* background: linear-gradient(90deg, #232323, #4a4a4a); */
 }
 
 .keyboard-input {
@@ -13,31 +13,29 @@
     font-size: 20px;
     height: calc(100vh - 40%);
     min-height: 300px;
+    border-radius: 10px;
     background: #fff;
 }
 
 .keyboard {
     margin: 0 auto;
-    width: 80%;
+    width: 90%;
     padding: 5px 0;
-    box-shadow: 0 0 50px rgba(156, 151, 151, 0.5);
     user-select: none;
+    border: 2px solid rgba(235, 232, 232, 0.7);
+    border-radius: 10px;
 }
 
 .keyboard__keys {
-    text-align: justify;
+    text-align: center;
 }
 
 .keyboard__key {
     position: relative;
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    vertical-align: top;
-    padding: 0;
+    padding: 20px 0 0 25px;
     height: 60px;
-    width: 60px;
-    min-width: 50px;
+    width: 6%;
     margin: 3px;
     color: #ffffff;
     font-size: 1rem;
@@ -48,6 +46,7 @@
         10px 20px 25px rgba(0, 0, 0, 0.4);
     overflow: hidden;
 }
+
 .keyboard__key::before {
     content: "";
     position: absolute;
@@ -64,55 +63,35 @@
     border-top: 1px solid #0004;
 }
 
-.keyboard__key:active {
-    /* animation: click 1.5s 1; */
+span {
+    position: relative;
 }
 
-.keyboard__key--xs {
-    width: 4%;
-    max-width: 90px;
-    /* background: rgba(180, 176, 176, 0.5); */
+span::after {
+    content: attr(data-key);
+    position: absolute;
+    left: -15px;
+    top: -15px;
 }
 
-.keyboard__key--s {
-    min-width: 35px;
-    width: 5%;
-    /* background: rgba(180, 176, 176, 0.5); */
+.keyboard__key--normal {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
 }
 
 .keyboard__key--m {
-    min-width: 45px;
-    width: 6%;
-    /* background: rgba(180, 176, 176, 0.5); */
+    min-width: 6%;
 }
 
 .keyboard__key--xl {
-    min-width: 130px;
-    width: 12%;
-    /* background: rgba(180, 176, 176, 0.5); */
+    min-width: 12.5%;
 }
 
 .keyboard__key--xxl {
-    width: 45%;
-    max-width: 500px;
-    /* background: rgba(180, 176, 176, 0.5); */
+    min-width: 44.6%;
 }
 
 .keyboard__key--active {
-    animation: click 1s 1;
-}
-
-@keyframes click {
-    0% {
-        transform: scale(1);
-    }
-    25% {
-        transform: scale(1.1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
-    }
+    transform: scale(0.9);
 }
