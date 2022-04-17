@@ -7,17 +7,14 @@ myStorage.setItem("lang", "ru");
 
 class Keyboard {
   constructor() {
-    this.main = null;
-    this.keyboardInput = null;
-    this.keyboardContainer = null;
-    this.keys = [];
-    this.spanKeys = [];
     this.capsLock = false;
-    this.audio = null;
+  }
+  init() {
+    this.createTextArea();
+    this.createKeyboard();
   }
 
   createTextArea() {
-    //создаем инпут
     this.audio = document.createElement("AUDIO");
     this.audio.setAttribute("src", "./click.mp3");
     document.querySelector("body").appendChild(this.audio);
@@ -27,28 +24,21 @@ class Keyboard {
   }
 
   createKeyboard() {
-    //создаем мейн блок для контейнера
     this.main = document.createElement("div");
     this.main.classList.add("keyboard");
 
-    //создаем контенер для клавиатуры
     this.keyboardContainer = document.createElement("div");
     this.keyboardContainer.classList.add("keyboard__keys");
-    //добавляем кнопки в контейнер
-    this.keyboardContainer.appendChild(this.createKeys());
-    this.keys = this.keyboardContainer.querySelectorAll(".keyboard__key");
-    this.spanKeys = this.keyboardContainer.querySelectorAll("span");
+    this.keyboardContainer.innerHTML = this.createKeys();
 
-    //добавляем в дом элементы
     this.main.appendChild(this.keyboardContainer);
     document.body.appendChild(this.keyboardInput);
     document.body.appendChild(this.main);
   }
 
-  // создаем функцию для создания кнопок
   createKeys() {
     const fragment = document.createDocumentFragment();
-
+    fragment.innerHTML = "";
     const keyLayout =
       myStorage.getItem(lang) === "ru" ? keyLayoutRu : keyLayoutEng;
 
@@ -56,120 +46,23 @@ class Keyboard {
       const char = key.letter;
       const subchar = key.subletter;
       const keyCode = key.keyCode;
-      const keyElement = document.createElement("button");
-      const keySpan = document.createElement("span");
       const insertLineBreak =
         ["Backspace", "Delete", "Enter", "Shift "].indexOf(char) !== -1;
 
-      keyElement.setAttribute("type", "button");
-      keyElement.classList.add("keyboard__key");
-      keyElement.appendChild(keySpan);
-      keyElement.addEventListener("click", () => {
-        this.audio.currentTime = 0;
-        this.audio.play();
-      });
-      keySpan.innerHTML = `<span data-code="${keyCode}" data-key="${subchar}">${char}</span>`;
-
-      switch (char) {
-        case "Backspace":
-          keyElement.classList.add(
-            "keyboard__key--normal",
-            "keyboard__key--xl"
-          );
-
-          break;
-        case "Tab":
-          keyElement.classList.add("keyboard__key--normal", "keyboard__key--m");
-          break;
-        case "Del":
-          keyElement.classList.add("keyboard__key--normal", "keyboard__key--m");
-          break;
-        case "CapsLock":
-          keyElement.classList.add(
-            "keyboard__key--normal",
-            "keyboard__key--xl"
-          );
-          // keyElement.addEventListener("click", () => {
-          //   this._toggleCapsLock();
-          //   keyElement.classList.toggle("keyboard__key--active", this.capsLock);
-          // });
-          break;
-        case "Enter":
-          keyElement.classList.add(
-            "keyboard__key--normal",
-            "keyboard__key--xl"
-          );
-          break;
-        case "Shift":
-          keyElement.classList.add(
-            "keyboard__key--normal",
-            "keyboard__key--xl"
-          );
-          break;
-        case "⇑":
-          keyElement.classList.add("keyboard__key--normal", "keyboard__key--m");
-          break;
-        case "Shift ":
-          keyElement.classList.add("keyboard__key--normal", "keyboard__key--m");
-          break;
-        case "Ctrl":
-          keyElement.classList.add("keyboard__key--normal", "keyboard__key--m");
-          break;
-        case "Win":
-          keyElement.classList.add("keyboard__key--normal", "keyboard__key--m");
-          break;
-        case "Alt":
-          keyElement.classList.add("keyboard__key--normal", "keyboard__key--m");
-          break;
-        case "Space":
-          keyElement.classList.add(
-            "keyboard__key--normal",
-            "keyboard__key--xxl"
-          );
-          break;
-        case "Alt":
-          keyElement.classList.add("keyboard__key--normal", "keyboard__key--m");
-          break;
-        case "Ctrl":
-          keyElement.classList.add("keyboard__key--normal", "keyboard__key--m");
-          break;
-        case "⇐":
-          keyElement.classList.add("keyboard__key--normal", "keyboard__key--m");
-          break;
-        case "⇓":
-          keyElement.classList.add("keyboard__key--normal", "keyboard__key--m");
-          break;
-        case "⇒":
-          keyElement.classList.add("keyboard__key--normal", "keyboard__key--m");
-          break;
-        default:
-          keyElement.addEventListener("click", () => {
-            for (const key of this.keys) {
-              key.classList.remove("keyboard__key--active");
-            }
-            keyElement.classList.add("keyboard__key--active");
-            this.keyboardInput.value += this.capsLock
-              ? char.toUpperCase()
-              : char.toLowerCase();
-          });
-          break;
-      }
-
-      fragment.appendChild(keyElement);
+      fragment.innerHTML += `<button class="keyboard__key" data-code="${keyCode}"><span data-key="${subchar}">${char}</span></button>`;
       if (insertLineBreak) {
-        fragment.appendChild(document.createElement("br"));
+        fragment.innerHTML += "<br/>";
       }
     });
 
-    return fragment;
+    return fragment.innerHTML;
   }
 }
 
 const keyboard = new Keyboard();
 
 window.addEventListener("DOMContentLoaded", () => {
-  keyboard.createTextArea();
-  keyboard.createKeyboard();
+  keyboard.init();
 });
 
 window.addEventListener("keydown", (event) => {
@@ -196,3 +89,61 @@ window.addEventListener("keydown", (event) => {
 //     }
 //   }
 // };
+
+// keyElement.addEventListener("click", () => {
+//   this.audio.currentTime = 0;
+//   this.audio.play();
+// });
+
+// switch (char) {
+//   case "Backspace":
+
+//     break;
+//   case "Tab":
+//     break;
+//   case "Del":
+//     break;
+//   case "CapsLock":
+//     // keyElement.addEventListener("click", () => {
+//     //   this._toggleCapsLock();
+//     //   keyElement.classList.toggle("keyboard__key--active", this.capsLock);
+//     // });
+//     break;
+//   case "Enter":
+//     break;
+//   case "Shift":
+//     break;
+//   case "⇑":
+//     break;
+//   case "Shift ":
+//     break;
+//   case "Ctrl":
+//     break;
+//   case "Win":
+//     break;
+//   case "Alt":
+//     break;
+//   case "Space":
+//     break;
+//   case "Alt":
+//     break;
+//   case "Ctrl":
+//     break;
+//   case "⇐":
+//     break;
+//   case "⇓":
+//     break;
+//   case "⇒":
+//     break;
+//   default:
+//     keyElement.addEventListener("click", () => {
+//       for (const key of this.keys) {
+//         key.classList.remove("keyboard__key--active");
+//       }
+//       keyElement.classList.add("keyboard__key--active");
+//       this.keyboardInput.value += this.capsLock
+//         ? char.toUpperCase()
+//         : char.toLowerCase();
+//     });
+//     break;
+// }
