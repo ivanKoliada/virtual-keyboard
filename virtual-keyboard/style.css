@@ -2,16 +2,15 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    /* background: linear-gradient(90deg, #232323, #4a4a4a); */
+    background: linear-gradient(90deg, #232323, #4a4a4a);
 }
 
 .keyboard-input {
     display: block;
     width: 80%;
-    margin: 30px auto;
+    margin: 20px auto;
     padding: 10px;
-    font-size: 20px;
-    height: calc(100vh - 40%);
+    font-size: 16px;
     min-height: 300px;
     border-radius: 10px;
     background: #fff;
@@ -65,6 +64,7 @@
 
 span {
     position: relative;
+    background: none;
 }
 
 span::after {
@@ -74,22 +74,38 @@ span::after {
     top: -15px;
 }
 
-.keyboard__key--normal {
+[data-code="Backspace"],
+[data-code="CapsLock"],
+[data-code="Enter"],
+[data-code="ShiftLeft"] {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    min-width: 12.5%;
+}
+
+[data-code="Tab"],
+[data-code="Delete"],
+[data-code="AltLeft"],
+[data-code="AltRight"],
+[data-code="ControlLeft"],
+[data-code="ControlRight"],
+[data-code="MetaLeft"],
+[data-code="ShiftRight"],
+[data-code="ArrowUp"],
+[data-code="ArrowDown"],
+[data-code="ArrowLeft"],
+[data-code="ArrowRight"] {
     padding: 0;
     justify-content: center;
     align-items: center;
 }
 
-.keyboard__key--m {
-    min-width: 6%;
-}
-
-.keyboard__key--xl {
-    min-width: 12.5%;
-}
-
-.keyboard__key--xxl {
-    min-width: 44.6%;
+[data-code="Space"] {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
 }
 
 .keyboard__key--active {
