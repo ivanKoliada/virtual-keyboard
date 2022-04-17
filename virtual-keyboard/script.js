@@ -1,10 +1,5 @@
 import { keyLayoutRu } from "./modules/layoutRu.js";
 import { keyLayoutEng } from "./modules/layoutEng.js";
-
-const lang = "ru";
-const myStorage = localStorage;
-myStorage.setItem("lang", "ru");
-
 class Keyboard {
   constructor() {
     this.capsLock = false;
@@ -16,7 +11,7 @@ class Keyboard {
 
   createTextArea() {
     this.audio = document.createElement("AUDIO");
-    this.audio.setAttribute("src", "./click.mp3");
+    this.audio.setAttribute("src", "./assets/audio/click.mp3");
     document.querySelector("body").appendChild(this.audio);
     this.keyboardInput = document.createElement("textarea");
     this.keyboardInput.classList.add("keyboard-input");
@@ -60,6 +55,9 @@ class Keyboard {
 }
 
 const keyboard = new Keyboard();
+const lang = "ru";
+const myStorage = localStorage;
+myStorage.setItem("lang", "ru");
 
 window.addEventListener("DOMContentLoaded", () => {
   keyboard.init();
