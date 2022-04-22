@@ -11,9 +11,10 @@
     margin: 20px auto;
     padding: 10px;
     font-size: 16px;
-    min-height: 300px;
+    min-height: 40vh;
     border-radius: 10px;
     background: #fff;
+    outline: none;
 }
 
 .keyboard {
@@ -44,6 +45,15 @@
         inset 0 -8px 8px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(0, 0, 0, 0.75),
         10px 20px 25px rgba(0, 0, 0, 0.4);
     overflow: hidden;
+}
+
+.keyboard__key:active {
+    transform: scale(0.9);
+    box-shadow: 0 0 30px #d3d9da;
+}
+
+.keyboard__key:hover {
+    cursor: pointer;
 }
 
 .keyboard__key::before {
@@ -82,6 +92,7 @@ span::after {
     justify-content: center;
     align-items: center;
     min-width: 12.5%;
+    color: rgba(22, 21, 21, 0.7);
 }
 
 [data-code="Tab"],
@@ -99,6 +110,7 @@ span::after {
     padding: 0;
     justify-content: center;
     align-items: center;
+    color: rgba(22, 21, 21, 0.7);
 }
 
 [data-code="Space"] {
@@ -106,8 +118,21 @@ span::after {
     justify-content: center;
     align-items: center;
     width: 45%;
+    color: rgba(22, 21, 21, 0.7);
 }
 
 .keyboard__key--active {
     transform: scale(0.9);
+    box-shadow: 0 0 30px #d3d9da;
+}
+
+.keyboard__key--caps {
+    box-shadow: 0 0 30px #d3d9da;
+}
+
+.keyboard__key--caps::after {
+    content: "\21EA";
+    position: absolute;
+    left: 20px;
+    color: rgba(240, 232, 232, 0.7);
 }
