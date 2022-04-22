@@ -74,15 +74,45 @@ export class Keyboard {
         this.audio.currentTime = 0;
         this.audio.play();
         this.keyboardInput.focus();
+        let caretStart = this.keyboardInput.selectionStart;
+        let caretEnd = this.keyboardInput.selectionEnd;
 
         switch (char) {
           case "Backspace":
-            this.keyboardInput.value = this.keyboardInput.value.slice(0, -1);
+            if (caretStart === caretEnd) {
+              this.keyboardInput.value = `${this.keyboardInput.value.slice(
+                0,
+                caretStart - 1
+              )}${this.keyboardInput.value.slice(caretStart)}`;
+              this.keyboardInput.setSelectionRange(
+                caretStart - 1,
+                caretStart - 1
+              );
+            } else {
+              this.keyboardInput.value = `${this.keyboardInput.value.slice(
+                0,
+                caretStart
+              )}${this.keyboardInput.value.slice(caretEnd)}`;
+              this.keyboardInput.setSelectionRange(caretStart, caretStart);
+            }
             break;
           case "Tab":
             this.keyboardInput.value += "    ";
             break;
           case "Delete":
+            if (caretStart === caretEnd) {
+              this.keyboardInput.value = `${this.keyboardInput.value.slice(
+                0,
+                caretStart
+              )}${this.keyboardInput.value.slice(caretStart + 1)}`;
+              this.keyboardInput.setSelectionRange(caretStart, caretStart);
+            } else {
+              this.keyboardInput.value = `${this.keyboardInput.value.slice(
+                0,
+                caretStart
+              )}${this.keyboardInput.value.slice(caretEnd)}`;
+              this.keyboardInput.setSelectionRange(caretStart, caretStart);
+            }
             break;
           case "CapsLock":
             button.classList.toggle("keyboard__key--caps", !this.capsLock);
@@ -109,6 +139,30 @@ export class Keyboard {
           case "AltLeft":
             break;
           case "AltRight":
+            break;
+          case "ArrowLeft":
+            this.keyboardInput.setSelectionRange(
+              caretStart - 1,
+              caretStart - 1
+            );
+            break;
+          case "ArrowRight":
+            this.keyboardInput.setSelectionRange(
+              caretStart + 1,
+              caretStart + 1
+            );
+            break;
+          case "ArrowUp":
+            this.keyboardInput.setSelectionRange(
+              caretStart - 123,
+              caretStart - 123
+            );
+            break;
+          case "ArrowDown":
+            this.keyboardInput.setSelectionRange(
+              caretStart + 123,
+              caretStart + 123
+            );
             break;
           default:
             this.keyboardInput.value += button.textContent;
