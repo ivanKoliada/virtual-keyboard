@@ -7,7 +7,8 @@
 
 .keyboard-input {
     display: block;
-    width: 80%;
+    width: 60%;
+    width: 950px;
     margin: 20px auto;
     padding: 10px;
     font-size: 16px;
@@ -19,7 +20,8 @@
 
 .keyboard {
     margin: 0 auto;
-    width: 90%;
+    margin-top: 20px;
+    width: 960px;
     padding: 5px 0;
     user-select: none;
     border: 2px solid rgba(235, 232, 232, 0.7);
@@ -27,7 +29,8 @@
 }
 
 .keyboard__keys {
-    text-align: center;
+    display: block;
+    margin: 0 10px;
 }
 
 .keyboard__key {
@@ -82,6 +85,7 @@ span::after {
     position: absolute;
     left: -15px;
     top: -15px;
+    font-size: 14px;
 }
 
 [data-code="Backspace"],
@@ -91,8 +95,7 @@ span::after {
     padding: 0;
     justify-content: center;
     align-items: center;
-    min-width: 12.5%;
-    color: rgba(22, 21, 21, 0.7);
+    color: rgba(22, 21, 21, 0.9);
 }
 
 [data-code="Tab"],
@@ -110,15 +113,63 @@ span::after {
     padding: 0;
     justify-content: center;
     align-items: center;
-    color: rgba(22, 21, 21, 0.7);
+    color: rgba(22, 21, 21, 0.9);
+}
+
+[data-code="Tab"] {
+    width: 8%;
+}
+
+[data-code="Backspace"] {
+    width: 13%;
+}
+
+[data-code="Delete"] {
+    width: 11%;
+}
+
+[data-code="CapsLock"] {
+    width: 10%;
+}
+
+[data-code="Enter"] {
+    width: 9%;
+}
+
+[data-code="ShiftRight"] {
+    width: 13.5%;
+}
+
+[data-code="ShiftLeft"] {
+    width: 12%;
+}
+
+[data-code="ControlLeft"] {
+    width: 7%;
+}
+
+[data-code="MetaLeft"] {
+    width: 7%;
+}
+
+[data-code="AltLeft"] {
+    width: 7%;
+}
+
+[data-code="AltRight"] {
+    width: 7%;
+}
+
+[data-code="ControlRight"] {
+    width: 7%;
 }
 
 [data-code="Space"] {
     padding: 0;
     justify-content: center;
     align-items: center;
-    width: 45%;
-    color: rgba(22, 21, 21, 0.7);
+    width: 41.2%;
+    color: rgba(22, 21, 21, 0.9);
 }
 
 .keyboard__key--active {
@@ -133,6 +184,13 @@ span::after {
 .keyboard__key--caps::after {
     content: "\21EA";
     position: absolute;
-    left: 20px;
+    left: 12px;
     color: rgba(240, 232, 232, 0.7);
+}
+
+.instruction {
+    text-align: center;
+    margin-top: 70px;
+    font-size: 16px;
+    color: #d3d9da;
 }
