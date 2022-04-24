@@ -12,6 +12,7 @@ export class Keyboard {
   init() {
     this.createAudio();
     this.createTextArea();
+    this.createInstruction();
     this.createKeyboard();
     this.addEvents();
   }
@@ -19,7 +20,7 @@ export class Keyboard {
   createAudio() {
     this.audio = document.createElement("AUDIO");
     this.audio.setAttribute("src", "./assets/audio/click.mp3");
-    document.querySelector("body").appendChild(this.audio);
+    document.body.append(this.audio);
   }
 
   createTextArea() {
@@ -36,10 +37,21 @@ export class Keyboard {
     this.keyboardContainer.classList.add("keyboard__keys");
     this.keyboardContainer.innerHTML = this.createKeys();
 
-    this.main.appendChild(this.keyboardContainer);
-    document.body.appendChild(this.keyboardInput);
-    document.body.appendChild(this.main);
+    this.main.append(this.keyboardContainer);
+    document.body.insertBefore(this.keyboardInput, this.instruction);
+    document.body.insertBefore(this.main, this.instruction);
     this.keys = document.querySelectorAll("button");
+  }
+
+  createInstruction() {
+    this.instruction = document.createElement("div");
+    this.instruction.classList.add("instruction");
+    this.instruction.innerHTML = `<pre>
+    The keyboard was created in the Windows.
+    Desktop resolution only.
+    To change layout press left alt + ctrl.
+    </pre>`;
+    document.body.append(this.instruction);
   }
 
   createKeys() {
@@ -76,6 +88,7 @@ export class Keyboard {
         this.keyboardInput.focus();
         let caretStart = this.keyboardInput.selectionStart;
         let caretEnd = this.keyboardInput.selectionEnd;
+        const rowLength = 105;
 
         switch (char) {
           case "Backspace":
@@ -153,19 +166,32 @@ export class Keyboard {
             );
             break;
           case "ArrowUp":
-            this.keyboardInput.setSelectionRange(
-              caretStart - 123,
-              caretStart - 123
-            );
+            if (caretStart <= rowLength) {
+              this.keyboardInput.setSelectionRange(caretStart, caretStart);
+            } else {
+              this.keyboardInput.setSelectionRange(
+                caretStart - rowLength,
+                caretStart - rowLength
+              );
+            }
             break;
           case "ArrowDown":
             this.keyboardInput.setSelectionRange(
-              caretStart + 123,
-              caretStart + 123
+              caretStart + rowLength,
+              caretStart + rowLength
             );
             break;
           default:
-            this.keyboardInput.value += button.textContent;
+            this.keyboardInput.value = `${this.keyboardInput.value.slice(
+              0,
+              caretStart
+            )}${button.textContent}${this.keyboardInput.value.slice(
+              caretStart
+            )}`;
+            this.keyboardInput.setSelectionRange(
+              caretStart + 1,
+              caretStart + 1
+            );
             break;
         }
       }
