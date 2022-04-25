@@ -1,6 +1,9 @@
 import { Keyboard } from "./modules/keyboard.js";
+import { eventsCase } from "./modules/eventsCase.js";
 
-const keyboard = new Keyboard();
+let cutOrCopy = "";
+
+export const keyboard = new Keyboard();
 if (!localStorage["lang"]) {
   localStorage.setItem("lang", "ru");
 }
@@ -12,10 +15,14 @@ window.addEventListener("DOMContentLoaded", () => {
 window.addEventListener("keydown", (event) => {
   event.preventDefault();
   keyboard.audio.currentTime = 0;
-  keyboard.audio.play();
+  if (event.shiftKey && event.repeat) {
+    keyboard.audio.pause();
+  } else keyboard.audio.play();
   let caretStart = keyboard.keyboardInput.selectionStart;
   let caretEnd = keyboard.keyboardInput.selectionEnd;
-  const rowLength = 105;
+  const caretPosition = (start, end) => {
+    keyboard.keyboardInput.setSelectionRange(start, end);
+  };
 
   if (event.ctrlKey && event.altKey) {
     keyboard.main.remove();
@@ -25,123 +32,44 @@ window.addEventListener("keydown", (event) => {
     keyboard.addEvents();
   }
 
+  if (event.ctrlKey && event.code === "KeyX") {
+    cutOrCopy = keyboard.keyboardInput.value.slice(caretStart, caretEnd);
+    keyboard.keyboardInput.value = `${keyboard.keyboardInput.value.slice(
+      0,
+      caretStart
+    )}${keyboard.keyboardInput.value.slice(caretEnd)}`;
+    caretPosition(caretStart, caretStart);
+  }
+
+  if (event.ctrlKey && event.code === "KeyV") {
+    keyboard.keyboardInput.value = `${keyboard.keyboardInput.value.slice(
+      0,
+      caretStart
+    )}${cutOrCopy}${keyboard.keyboardInput.value.slice(caretEnd)}`;
+    caretPosition(caretStart + cutOrCopy.length, caretStart + cutOrCopy.length);
+  }
+
+  if (event.ctrlKey && event.code === "KeyC") {
+    cutOrCopy = keyboard.keyboardInput.value.slice(caretStart, caretEnd);
+    caretPosition(caretStart + cutOrCopy.length, caretStart + cutOrCopy.length);
+  }
+
   keyboard.keys.forEach((key) => {
     const char = key.getAttribute("data-code");
     if (event.code === char) {
       key.classList.add("keyboard__key--active");
       keyboard.keyboardInput.focus();
 
-      switch (char) {
-        case "Backspace":
-          if (caretStart === caretEnd) {
-            keyboard.keyboardInput.value = `${keyboard.keyboardInput.value.slice(
-              0,
-              caretStart - 1
-            )}${keyboard.keyboardInput.value.slice(caretStart)}`;
-            keyboard.keyboardInput.setSelectionRange(
-              caretStart - 1,
-              caretStart - 1
-            );
-          } else {
-            keyboard.keyboardInput.value = `${keyboard.keyboardInput.value.slice(
-              0,
-              caretStart
-            )}${keyboard.keyboardInput.value.slice(caretEnd)}`;
-            keyboard.keyboardInput.setSelectionRange(caretStart, caretStart);
-          }
-          break;
-        case "Tab":
-          keyboard.keyboardInput.value += "    ";
-          break;
-        case "Delete":
-          if (caretStart === caretEnd) {
-            keyboard.keyboardInput.value = `${keyboard.keyboardInput.value.slice(
-              0,
-              caretStart
-            )}${keyboard.keyboardInput.value.slice(caretStart + 1)}`;
-            keyboard.keyboardInput.setSelectionRange(caretStart, caretStart);
-          } else {
-            keyboard.keyboardInput.value = `${keyboard.keyboardInput.value.slice(
-              0,
-              caretStart
-            )}${keyboard.keyboardInput.value.slice(caretEnd)}`;
-            keyboard.keyboardInput.setSelectionRange(caretStart, caretStart);
-          }
-          break;
-        case "CapsLock":
-          key.classList.toggle("keyboard__key--caps", !keyboard.capsLock);
-          keyboard._toggleCapsLock();
-          break;
-        case "Enter":
-          keyboard.keyboardInput.value += "\n";
-          break;
-        case "ShiftLeft":
-          keyboard._toggleShift();
-          break;
-        case "ShiftRight":
-          keyboard._toggleShift();
-          break;
-        case "ControlLeft":
-          break;
-        case "ControlRight":
-          break;
-        case "MetaLeft":
-          break;
-        case "Space":
-          keyboard.keyboardInput.value += " ";
-          break;
-        case "AltLeft":
-          break;
-        case "AltRight":
-          break;
-        case "ArrowLeft":
-          keyboard.keyboardInput.setSelectionRange(
-            caretStart - 1,
-            caretStart - 1
-          );
-          break;
-        case "ArrowRight":
-          keyboard.keyboardInput.setSelectionRange(
-            caretStart + 1,
-            caretStart + 1
-          );
-          break;
-        case "ArrowUp":
-          if (caretStart <= rowLength) {
-            keyboard.keyboardInput.setSelectionRange(caretStart, caretStart);
-          } else {
-            keyboard.keyboardInput.setSelectionRange(
-              caretStart - rowLength,
-              caretStart - rowLength
-            );
-          }
-          break;
-        case "ArrowDown":
-          keyboard.keyboardInput.setSelectionRange(
-            caretStart + rowLength,
-            caretStart + rowLength
-          );
-          break;
-        default:
-          keyboard.keyboardInput.value = `${keyboard.keyboardInput.value.slice(
-            0,
-            caretStart
-          )}${key.textContent}${keyboard.keyboardInput.value.slice(
-            caretStart
-          )}`;
-          keyboard.keyboardInput.setSelectionRange(
-            caretStart + 1,
-            caretStart + 1
-          );
-          break;
-      }
+      eventsCase(char, key, keyboard, caretStart, caretEnd);
     }
   });
 });
 
 window.addEventListener("keyup", (event) => {
   event.preventDefault();
-
+  if (event.code === "ShiftLeft") {
+    keyboard._toggleShift();
+  }
   keyboard.keys.forEach((key) => {
     const char = key.getAttribute("data-code");
     if (event.code === char) {

@@ -42,7 +42,6 @@ export const keyLayoutRu = [
   { letter: "&#92;", subletter: "/", keyCode: "Backslash" },
   { letter: "Enter", subletter: "", keyCode: "Enter" },
   { letter: "Shift", subletter: "", keyCode: "ShiftLeft" },
-  // { letter: "&#92;", subletter: "/", keyCode: "Backslash" },
   { letter: "я", subletter: "", keyCode: "KeyZ" },
   { letter: "ч", subletter: "", keyCode: "KeyX" },
   { letter: "с", subletter: "", keyCode: "KeyC" },

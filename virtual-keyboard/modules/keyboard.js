@@ -1,6 +1,6 @@
 import { keyLayoutRu } from "./layoutRu.js";
 import { keyLayoutEng } from "./layoutEng.js";
-
+import { eventsCase } from "./eventsCase.js";
 export class Keyboard {
   constructor() {
     this.capsLock = false;
@@ -48,7 +48,7 @@ export class Keyboard {
     this.instruction.classList.add("instruction");
     this.instruction.innerHTML = `<pre>
     The keyboard was created in the Windows.
-    Desktop resolution only.
+    Desktop resolution only (>= 1024).
     To change layout press left alt + ctrl.
     </pre>`;
     document.body.append(this.instruction);
@@ -88,112 +88,8 @@ export class Keyboard {
         this.keyboardInput.focus();
         let caretStart = this.keyboardInput.selectionStart;
         let caretEnd = this.keyboardInput.selectionEnd;
-        const rowLength = 105;
 
-        switch (char) {
-          case "Backspace":
-            if (caretStart === caretEnd) {
-              this.keyboardInput.value = `${this.keyboardInput.value.slice(
-                0,
-                caretStart - 1
-              )}${this.keyboardInput.value.slice(caretStart)}`;
-              this.keyboardInput.setSelectionRange(
-                caretStart - 1,
-                caretStart - 1
-              );
-            } else {
-              this.keyboardInput.value = `${this.keyboardInput.value.slice(
-                0,
-                caretStart
-              )}${this.keyboardInput.value.slice(caretEnd)}`;
-              this.keyboardInput.setSelectionRange(caretStart, caretStart);
-            }
-            break;
-          case "Tab":
-            this.keyboardInput.value += "    ";
-            break;
-          case "Delete":
-            if (caretStart === caretEnd) {
-              this.keyboardInput.value = `${this.keyboardInput.value.slice(
-                0,
-                caretStart
-              )}${this.keyboardInput.value.slice(caretStart + 1)}`;
-              this.keyboardInput.setSelectionRange(caretStart, caretStart);
-            } else {
-              this.keyboardInput.value = `${this.keyboardInput.value.slice(
-                0,
-                caretStart
-              )}${this.keyboardInput.value.slice(caretEnd)}`;
-              this.keyboardInput.setSelectionRange(caretStart, caretStart);
-            }
-            break;
-          case "CapsLock":
-            button.classList.toggle("keyboard__key--caps", !this.capsLock);
-            this._toggleCapsLock();
-            break;
-          case "Enter":
-            this.keyboardInput.value += "\n";
-            break;
-          case "ShiftLeft":
-            this._toggleShift();
-            break;
-          case "ShiftRight":
-            this._toggleShift();
-            break;
-          case "ControlLeft":
-            break;
-          case "ControlRight":
-            break;
-          case "MetaLeft":
-            break;
-          case "Space":
-            this.keyboardInput.value += " ";
-            break;
-          case "AltLeft":
-            break;
-          case "AltRight":
-            break;
-          case "ArrowLeft":
-            this.keyboardInput.setSelectionRange(
-              caretStart - 1,
-              caretStart - 1
-            );
-            break;
-          case "ArrowRight":
-            this.keyboardInput.setSelectionRange(
-              caretStart + 1,
-              caretStart + 1
-            );
-            break;
-          case "ArrowUp":
-            if (caretStart <= rowLength) {
-              this.keyboardInput.setSelectionRange(caretStart, caretStart);
-            } else {
-              this.keyboardInput.setSelectionRange(
-                caretStart - rowLength,
-                caretStart - rowLength
-              );
-            }
-            break;
-          case "ArrowDown":
-            this.keyboardInput.setSelectionRange(
-              caretStart + rowLength,
-              caretStart + rowLength
-            );
-            break;
-          default:
-            this.keyboardInput.value = `${this.keyboardInput.value.slice(
-              0,
-              caretStart
-            )}${button.textContent}${this.keyboardInput.value.slice(
-              caretStart
-            )}`;
-            this.keyboardInput.setSelectionRange(
-              caretStart + 1,
-              caretStart + 1
-            );
-            break;
-        }
+        eventsCase(char, button, this, caretStart, caretEnd, );
       }
     });
   }
