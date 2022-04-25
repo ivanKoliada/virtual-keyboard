@@ -42,7 +42,6 @@ export const keyLayoutEng = [
   { letter: "&#92;", subletter: "|", keyCode: "Backslash" },
   { letter: "Enter", subletter: "", keyCode: "Enter" },
   { letter: "Shift", subletter: "", keyCode: "ShiftLeft" },
-  // { letter: "&#92;", subletter: "|", keyCode: "Backslash" },
   { letter: "z", subletter: "", keyCode: "KeyZ" },
   { letter: "x", subletter: "", keyCode: "KeyX" },
   { letter: "c", subletter: "", keyCode: "KeyC" },
