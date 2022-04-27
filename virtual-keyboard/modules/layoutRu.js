@@ -57,6 +57,7 @@ export const keyLayoutRu = [
   { letter: "Ctrl", subletter: "", keyCode: "ControlLeft" },
   { letter: "&#10070", subletter: "", keyCode: "MetaLeft" },
   { letter: "Alt", subletter: "", keyCode: "AltLeft" },
+  { letter: "mic", subletter: "", keyCode: "mic" },
   { letter: "Space", subletter: "", keyCode: "Space" },
   { letter: "Alt", subletter: "", keyCode: "AltRight" },
   { letter: "&#8678;", subletter: "", keyCode: "ArrowLeft" },

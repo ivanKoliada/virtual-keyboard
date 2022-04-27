@@ -89,6 +89,15 @@ export function eventsCase(char, key, keyClass, caretStart, caretEnd) {
     case "ArrowDown":
       caretPosition(caretStart + rowLength, caretStart + rowLength);
       break;
+    case "mic ":
+      keyClass.recognizer.lang = "eng-Eng";
+      keyClass.recognizer.start();
+      
+      break;
+    case "mic":
+      keyClass.recognizer.lang = "ru-Ru";
+      keyClass.recognizer.start();
+      break;
     default:
       if (event.ctrlKey && event.code === "KeyX") {
         break;
@@ -97,11 +106,21 @@ export function eventsCase(char, key, keyClass, caretStart, caretEnd) {
       } else if (event.ctrlKey && event.code === "KeyC") {
         break;
       } else {
-        keyClass.keyboardInput.value = `${keyClass.keyboardInput.value.slice(
-          0,
-          caretStart
-        )}${key.textContent}${keyClass.keyboardInput.value.slice(caretStart)}`;
-        caretPosition(caretStart + 1, caretStart + 1);
+        if (caretStart === caretEnd) {
+          keyClass.keyboardInput.value = `${keyClass.keyboardInput.value.slice(
+            0,
+            caretStart
+          )}${key.textContent}${keyClass.keyboardInput.value.slice(
+            caretStart
+          )}`;
+          caretPosition(caretStart + 1, caretStart + 1);
+        } else {
+          keyClass.keyboardInput.value = `${keyClass.keyboardInput.value.slice(
+            0,
+            caretStart
+          )}${key.textContent}${keyClass.keyboardInput.value.slice(caretEnd)}`;
+          caretPosition(caretStart + 1, caretStart + 1);
+        }
       }
       break;
   }
