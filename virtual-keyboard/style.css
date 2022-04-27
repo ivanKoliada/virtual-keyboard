@@ -202,7 +202,6 @@ span::after {
     height: 15px;
     color: rgba(22, 21, 21, 0.9);
     background: none;
-    /* animation: pulse 1s ease-in-out infinite; */
 }
 
 .active_pulse {
