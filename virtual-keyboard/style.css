@@ -98,6 +98,7 @@ span::after {
     color: rgba(22, 21, 21, 0.9);
 }
 
+[data-code="mic"],
 [data-code="Tab"],
 [data-code="Delete"],
 [data-code="AltLeft"],
@@ -168,7 +169,7 @@ span::after {
     padding: 0;
     justify-content: center;
     align-items: center;
-    width: 41.2%;
+    width: 34.5%;
     color: rgba(22, 21, 21, 0.9);
 }
 
@@ -193,4 +194,29 @@ span::after {
     margin-top: 70px;
     font-size: 16px;
     color: #d3d9da;
+}
+
+#microphone {
+    position: relative;
+    width: 15px;
+    height: 15px;
+    color: rgba(22, 21, 21, 0.9);
+    background: none;
+    /* animation: pulse 1s ease-in-out infinite; */
+}
+
+.active_pulse {
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(0.85);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    to {
+        transform: scale(0.85);
+    }
 }
