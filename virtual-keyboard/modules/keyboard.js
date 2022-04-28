@@ -1,7 +1,10 @@
-import { keyLayoutRu } from "./layoutRu.js";
-import { keyLayoutEng } from "./layoutEng.js";
-import { eventsCase } from "./eventsCase.js";
-export class Keyboard {
+import keyLayoutRu from './layoutRu.js';
+
+import keyLayoutEng from './layoutEng.js';
+
+import eventsCase from './eventsCase.js';
+
+export default class Keyboard {
   constructor() {
     this.capsLock = false;
     this.shift = false;
@@ -11,6 +14,7 @@ export class Keyboard {
     this.recognizer = null;
     this.microphone = null;
   }
+
   init() {
     this.createAudio();
     this.createSpeechRecognition();
@@ -21,8 +25,8 @@ export class Keyboard {
   }
 
   createAudio() {
-    this.audio = document.createElement("AUDIO");
-    this.audio.setAttribute("src", "./assets/audio/click.mp3");
+    this.audio = document.createElement('AUDIO');
+    this.audio.setAttribute('src', './assets/audio/click.mp3');
     document.body.append(this.audio);
   }
 
@@ -30,47 +34,45 @@ export class Keyboard {
     this.recognizer = new webkitSpeechRecognition();
     this.recognizer.interimResults = true;
     this.recognizer.onresult = (e) => {
-      let result = e.results[e.resultIndex];
+      const result = e.results[e.resultIndex];
       if (result.isFinal) {
-        let recText = result[0].transcript;
-        let caretStart = this.keyboardInput.selectionStart;
+        const recText = result[0].transcript;
+        const caretStart = this.keyboardInput.selectionStart;
         this.keyboardInput.value = `${this.keyboardInput.value.slice(
           0,
-          this.keyboardInput.selectionStart
-        )}${recText}${this.keyboardInput.value.slice(
-          this.keyboardInput.selectionStart
-        )}`;
+          this.keyboardInput.selectionStart,
+        )}${recText}${this.keyboardInput.value.slice(this.keyboardInput.selectionStart)}`;
         this.keyboardInput.setSelectionRange(
           caretStart + recText.length,
-          caretStart + recText.length
+          caretStart + recText.length,
         );
       }
     };
   }
 
   createTextArea() {
-    this.keyboardInput = document.createElement("textarea");
-    this.keyboardInput.classList.add("keyboard-input");
-    this.keyboardInput.placeholder = "Please, type something here...";
+    this.keyboardInput = document.createElement('textarea');
+    this.keyboardInput.classList.add('keyboard-input');
+    this.keyboardInput.placeholder = 'Please, type something here...';
   }
 
   createKeyboard() {
-    this.main = document.createElement("div");
-    this.main.classList.add("keyboard");
+    this.main = document.createElement('div');
+    this.main.classList.add('keyboard');
 
-    this.keyboardContainer = document.createElement("div");
-    this.keyboardContainer.classList.add("keyboard__keys");
+    this.keyboardContainer = document.createElement('div');
+    this.keyboardContainer.classList.add('keyboard__keys');
     this.keyboardContainer.innerHTML = this.createKeys();
 
     this.main.append(this.keyboardContainer);
     document.body.insertBefore(this.keyboardInput, this.instruction);
     document.body.insertBefore(this.main, this.instruction);
-    this.keys = document.querySelectorAll("button");
+    this.keys = document.querySelectorAll('button');
   }
 
   createInstruction() {
-    this.instruction = document.createElement("div");
-    this.instruction.classList.add("instruction");
+    this.instruction = document.createElement('div');
+    this.instruction.classList.add('instruction');
     this.instruction.innerHTML = `<pre>
     The keyboard was created in the Windows.
     Desktop resolution only (>= 1024).
@@ -80,21 +82,15 @@ export class Keyboard {
   }
 
   createKeys() {
-    let fragment = "";
-    const keyLayout =
-      localStorage.getItem("lang") === "ru" ? keyLayoutRu : keyLayoutEng;
+    let fragment = '';
+    const keyLayout = localStorage.getItem('lang') === 'ru' ? keyLayoutRu : keyLayoutEng;
 
     keyLayout.forEach((key) => {
-      const char =
-        this.capsLock && key.letter.length === 1
-          ? key.letter.toUpperCase()
-          : key.letter;
-      const subchar = key.subletter;
-      const keyCode = key.keyCode;
-      const insertLineBreak =
-        ["Backspace", "Delete", "Enter", "Shift "].indexOf(char) !== -1;
+      const char = this.capsLock && key.letter.length === 1 ? key.letter.toUpperCase() : key.letter;
+      const { subletter: subchar, keyCode } = key;
+      const insertLineBreak = ['Backspace', 'Delete', 'Enter', 'Shift '].indexOf(char) !== -1;
 
-      if (char === "mic" || char === "mic ") {
+      if (char === 'mic' || char === 'mic ') {
         fragment += `<button class="keyboard__key" data-code="${keyCode}"><span data-key="${subchar}"><svg id="microphone" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 512 512">
         <g>
           <g>
@@ -106,7 +102,7 @@ export class Keyboard {
       } else {
         fragment += `<button class="keyboard__key" data-code="${keyCode}"><span data-key="${subchar}">${char}</span></button>`;
         if (insertLineBreak) {
-          fragment += "<br/>";
+          fragment += '<br/>';
         }
       }
     });
@@ -115,58 +111,51 @@ export class Keyboard {
   }
 
   addEvents() {
-    this.microphone = document.getElementById("microphone");
-    this.keyboardContainer.addEventListener("click", ({ target }) => {
-      const button = target.closest(".keyboard__key");
+    this.microphone = document.getElementById('microphone');
+    this.keyboardContainer.addEventListener('click', ({ target }) => {
+      const button = target.closest('.keyboard__key');
       if (button) {
-        const char = button.getAttribute("data-code");
+        const char = button.getAttribute('data-code');
         this.audio.currentTime = 0;
         this.audio.play();
         this.keyboardInput.focus();
-        let caretStart = this.keyboardInput.selectionStart;
-        let caretEnd = this.keyboardInput.selectionEnd;
+        const caretStart = this.keyboardInput.selectionStart;
+        const caretEnd = this.keyboardInput.selectionEnd;
 
         eventsCase(char, button, this, caretStart, caretEnd);
       }
     });
-    this.recognizer.addEventListener("audiostart", () => {
-      this.microphone.classList.add("active_pulse");
+    this.recognizer.addEventListener('audiostart', () => {
+      this.microphone.classList.add('active_pulse');
     });
 
-    this.recognizer.addEventListener("end", () => {
-      this.microphone.classList.remove("active_pulse");
+    this.recognizer.addEventListener('end', () => {
+      this.microphone.classList.remove('active_pulse');
     });
   }
 
-  _toggleCapsLock() {
+  toggleCapsLock() {
     this.capsLock = !this.capsLock;
 
     for (const key of this.keys) {
       const value = key.textContent;
       if (value.length === 1) {
-        this.capsLock
-          ? (key.firstChild.innerHTML = value.toUpperCase())
-          : (key.firstChild.innerHTML = value.toLowerCase());
+        key.firstChild.innerHTML = this.capsLock ? value.toUpperCase() : value.toLowerCase();
       }
     }
   }
 
-  _toggleShift() {
+  toggleShift() {
     this.shift = !this.shift;
 
     for (const key of this.keys) {
       const inner = key.firstChild;
       const value = key.textContent;
-      if (!inner.getAttribute("data-key") && value.length === 1) {
-        this.shift
-          ? (inner.innerHTML = value.toUpperCase())
-          : (inner.innerHTML = value.toLowerCase());
+      if (!inner.getAttribute('data-key') && value.length === 1) {
+        inner.innerHTML = this.shift ? value.toUpperCase() : value.toLowerCase();
       }
-      if (inner.getAttribute("data-key") && value.length === 1) {
-        [inner.textContent, inner.dataset.key] = [
-          inner.dataset.key,
-          inner.textContent,
-        ];
+      if (inner.getAttribute('data-key') && value.length === 1) {
+        [inner.textContent, inner.dataset.key] = [inner.dataset.key, inner.textContent];
       }
     }
   }
