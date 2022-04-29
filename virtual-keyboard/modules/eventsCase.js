@@ -1,4 +1,4 @@
-export default function eventsCase(char, key, keyController, caretStart, caretEnd) {
+export default function eventsCase(char, key, keyController, caretStart, caretEnd, event) {
   const keyClass = keyController;
   const rowLength = 105;
   const caretPosition = (start, end) => {
@@ -21,7 +21,11 @@ export default function eventsCase(char, key, keyController, caretStart, caretEn
       }
       break;
     case 'Tab':
-      keyClass.keyboardInput.value += '    ';
+      keyClass.keyboardInput.value = `${keyClass.keyboardInput.value.slice(
+        0,
+        caretStart,
+      )}    ${keyClass.keyboardInput.value.slice(caretStart)}`;
+      caretPosition(caretStart + 4, caretStart + 4);
       break;
     case 'Delete':
       if (caretStart === caretEnd) {
@@ -100,11 +104,11 @@ export default function eventsCase(char, key, keyController, caretStart, caretEn
       keyClass.recognizer.start();
       break;
     default:
-      if (event.ctrlKey && event.code === 'KeyX') {
+      if (event?.ctrlKey && event?.code === 'KeyX') {
         break;
-      } else if (event.ctrlKey && event.code === 'KeyV') {
+      } else if (event?.ctrlKey && event?.code === 'KeyV') {
         break;
-      } else if (event.ctrlKey && event.code === 'KeyC') {
+      } else if (event?.ctrlKey && event?.code === 'KeyC') {
         break;
       } else if (caretStart === caretEnd) {
         keyClass.keyboardInput.value = `${keyClass.keyboardInput.value.slice(0, caretStart)}${

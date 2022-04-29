@@ -96,6 +96,7 @@ span::after {
     justify-content: center;
     align-items: center;
     color: rgba(22, 21, 21, 0.9);
+    font-weight: bold;
 }
 
 [data-code="mic"],
@@ -115,6 +116,7 @@ span::after {
     justify-content: center;
     align-items: center;
     color: rgba(22, 21, 21, 0.9);
+    font-weight: bold;
 }
 
 [data-code="Tab"] {
