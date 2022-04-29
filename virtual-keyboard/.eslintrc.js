@@ -9,12 +9,9 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'no-restricted-syntax': [
-      'error',
-      'WithStatement',
-      "BinaryExpression[operator='in']",
-    ],
-    'no-restricted-globals': ['error', 'event', 'fdescribe'],
-    // 'import/extensions': ['never'],
+    'no-restricted-syntax': 0,
+    'import/extensions': 0,
+    'no-undef': 0,
+    'new-cap': 0,
   },
 };
