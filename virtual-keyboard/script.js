@@ -12,17 +12,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
 window.addEventListener('keydown', (event) => {
   event.preventDefault();
-  keyboard.audio.currentTime = 0;
-  if (event.shiftKey && event.repeat) {
-    keyboard.audio.pause();
-  } else keyboard.audio.play();
 
   keyboard.keys.forEach((key) => {
     const char = key.getAttribute('data-code');
     if (event.code === char) {
       key.classList.add('keyboard__key--active');
-      keyboard.keyboardInput.focus();
-
       controller(char, key, keyboard);
     }
   });

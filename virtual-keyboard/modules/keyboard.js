@@ -15,6 +15,7 @@ export default class Keyboard {
     this.recognizer = null;
     this.microphone = null;
     this.copyText = '';
+    this.tempValue = [];
   }
 
   init() {
@@ -118,9 +119,6 @@ export default class Keyboard {
       const button = target.closest('.keyboard__key');
       if (button) {
         const char = button.getAttribute('data-code');
-        this.audio.currentTime = 0;
-        this.audio.play();
-        this.keyboardInput.focus();
 
         controller(char, button, this);
       }

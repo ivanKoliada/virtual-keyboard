@@ -6,6 +6,15 @@ export default function controller(char, key, keyController) {
   const caretPosition = (start, end) => {
     instance.keyboardInput.setSelectionRange(start, end);
   };
+  instance.tempValue = instance.tempValue.slice(-1);
+  instance.tempValue.push(key.textContent);
+
+  if (!event.repeat) {
+    instance.audio.currentTime = 0;
+    instance.audio.play();
+  }
+
+  instance.keyboardInput.focus();
   switch (char) {
     case 'Backspace':
       if (caretStart === caretEnd) {
@@ -61,7 +70,9 @@ export default function controller(char, key, keyController) {
       }
       break;
     case 'ShiftRight':
-      instance.toggleShift();
+      if (!event?.repeat) {
+        instance.toggleShift();
+      }
       break;
     case 'ControlLeft':
       if (event.altKey) {
