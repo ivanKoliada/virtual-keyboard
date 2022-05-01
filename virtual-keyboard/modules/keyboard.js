@@ -14,6 +14,7 @@ export default class Keyboard {
     this.keyboardInput = null;
     this.recognizer = null;
     this.microphone = null;
+    this.copyText = '';
   }
 
   init() {
@@ -77,7 +78,7 @@ export default class Keyboard {
     this.instruction.innerHTML = `<pre>
     The keyboard was created in the Windows.
     Desktop resolution only (>= 1024).
-    To change layout press left alt + ctrl.
+    To change layout press alt + ctrl.
     </pre>`;
     document.body.append(this.instruction);
   }
@@ -133,6 +134,14 @@ export default class Keyboard {
     this.recognizer.addEventListener('end', () => {
       this.microphone.classList.remove('active_pulse');
     });
+  }
+
+  toggleLayout() {
+    this.main.remove();
+    const valueLang = localStorage.getItem('lang') === 'ru' ? 'eng' : 'ru';
+    localStorage.setItem('lang', valueLang);
+    this.createKeyboard();
+    this.addEvents();
   }
 
   toggleCapsLock() {

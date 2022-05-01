@@ -62,8 +62,14 @@ export default function eventsCase(char, key, keyController, caretStart, caretEn
       keyClass.toggleShift();
       break;
     case 'ControlLeft':
+      if (event.altKey) {
+        keyClass.toggleLayout();
+      }
       break;
     case 'ControlRight':
+      if (event.altKey) {
+        keyClass.toggleLayout();
+      }
       break;
     case 'MetaLeft':
       break;
@@ -75,8 +81,14 @@ export default function eventsCase(char, key, keyController, caretStart, caretEn
       caretPosition(caretStart + 1, caretStart + 1);
       break;
     case 'AltRight':
+      if (event.ctrlKey) {
+        keyClass.toggleLayout();
+      }
       break;
     case 'AltLeft':
+      if (event.ctrlKey) {
+        keyClass.toggleLayout();
+      }
       break;
     case 'ArrowLeft':
       caretPosition(caretStart - 1, caretStart - 1);
