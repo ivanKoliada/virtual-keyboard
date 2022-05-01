@@ -1,6 +1,5 @@
 export default function controller(char, key, keyController) {
   const instance = keyController;
-  const rowLength = 105;
   const caretStart = instance.keyboardInput.selectionStart;
   const caretEnd = instance.keyboardInput.selectionEnd;
   const caretPosition = (start, end) => {
@@ -110,14 +109,16 @@ export default function controller(char, key, keyController) {
       caretPosition(caretStart + 1, caretStart + 1);
       break;
     case 'ArrowUp':
-      if (caretStart <= rowLength) {
-        caretPosition(0, 0);
-      } else {
-        caretPosition(caretStart - rowLength, caretStart - rowLength);
-      }
+      // if (caretStart <= rowLength) {
+      //   caretPosition(0, 0);
+      // } else {
+      //   caretPosition(caretStart - rowLength, caretStart - rowLength);
+      // }
+      window.getSelection().modify('move', 'left', 'paragraph');
       break;
     case 'ArrowDown':
-      caretPosition(caretStart + rowLength, caretStart + rowLength);
+      // caretPosition(caretStart + rowLength, caretStart + rowLength);
+      window.getSelection().modify('move', 'right', 'paragraph');
       break;
     case 'mic ':
       instance.recognizer.lang = 'eng-Eng';
@@ -161,20 +162,6 @@ export default function controller(char, key, keyController) {
         }${instance.keyboardInput.value.slice(caretEnd)}`;
         caretPosition(caretStart + 1, caretStart + 1);
       }
-      // console.log(window.getSelection().modify('move', 'left', 'line'));
-
-      // function getLineNumberAndColumnIndex(textarea) {
-      //   let textLines = textarea.value.substr(0, textarea.selectionStart).split('\n');
-      //   let currentLineNumber = textLines.length;
-      //   let currentColumnIndex = textLines[textLines.length - 1].length;
-      //   console.log(
-      //     'Current Line Number ' +
-      //       currentLineNumber +
-      //       ' Current Column Index ' +
-      //       currentColumnIndex,
-      //   );
-      // }
-      // getLineNumberAndColumnIndex(instance.keyboardInput);
       break;
   }
 }
