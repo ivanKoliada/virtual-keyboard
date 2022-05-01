@@ -24,7 +24,7 @@ window.addEventListener('keydown', (event) => {
 
 window.addEventListener('keyup', (event) => {
   event.preventDefault();
-  if (event.code === 'ShiftLeft') {
+  if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
     keyboard.toggleShift();
   }
   keyboard.keys.forEach((key) => {
