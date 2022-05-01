@@ -8,6 +8,15 @@ if (!localStorage.lang) {
   localStorage.setItem('lang', 'ru');
 }
 
+function changeLayout(keyController) {
+  const keyClass = keyController;
+  keyClass.main.remove();
+  const valueLang = localStorage.getItem('lang') === 'ru' ? 'eng' : 'ru';
+  localStorage.setItem('lang', valueLang);
+  keyClass.createKeyboard();
+  keyClass.addEvents();
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   keyboard.init();
 });
@@ -25,11 +34,7 @@ window.addEventListener('keydown', (event) => {
   };
 
   if (event.ctrlKey && event.altKey) {
-    keyboard.main.remove();
-    const valueLang = localStorage.getItem('lang') === 'ru' ? 'eng' : 'ru';
-    localStorage.setItem('lang', valueLang);
-    keyboard.createKeyboard();
-    keyboard.addEvents();
+    changeLayout(keyboard);
   }
 
   if (event.ctrlKey && event.code === 'KeyX') {
