@@ -1,4 +1,4 @@
-export default function eventsCase(char, key, keyController, caretStart, caretEnd, event) {
+export default function eventsCase(char, key, keyController, caretStart, caretEnd) {
   const keyClass = keyController;
   const rowLength = 105;
   const caretPosition = (start, end) => {
@@ -54,7 +54,7 @@ export default function eventsCase(char, key, keyController, caretStart, caretEn
       caretPosition(caretStart + 1, caretStart + 1);
       break;
     case 'ShiftLeft':
-      if (!event.repeat) {
+      if (!event?.repeat) {
         keyClass.toggleShift();
       }
       break;
@@ -121,6 +121,20 @@ export default function eventsCase(char, key, keyController, caretStart, caretEn
         }${keyClass.keyboardInput.value.slice(caretEnd)}`;
         caretPosition(caretStart + 1, caretStart + 1);
       }
+      // console.log(window.getSelection().modify('move', 'left', 'line'));
+
+      // function getLineNumberAndColumnIndex(textarea) {
+      //   let textLines = textarea.value.substr(0, textarea.selectionStart).split('\n');
+      //   let currentLineNumber = textLines.length;
+      //   let currentColumnIndex = textLines[textLines.length - 1].length;
+      //   console.log(
+      //     'Current Line Number ' +
+      //       currentLineNumber +
+      //       ' Current Column Index ' +
+      //       currentColumnIndex,
+      //   );
+      // }
+      // getLineNumberAndColumnIndex(keyClass.keyboardInput);
       break;
   }
 }

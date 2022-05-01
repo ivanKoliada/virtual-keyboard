@@ -9,6 +9,7 @@ export default class Keyboard {
     this.capsLock = false;
     this.shift = false;
     this.keys = null;
+    this.main = null;
     this.keyboardContainer = null;
     this.keyboardInput = null;
     this.recognizer = null;
