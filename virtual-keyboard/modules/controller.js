@@ -64,22 +64,24 @@ export default function controller(char, key, keyController) {
       caretPosition(caretStart + 1, caretStart + 1);
       break;
     case 'ShiftLeft':
-      if (!event?.repeat) {
+      if (!event.repeat) {
         instance.toggleShift();
       }
       break;
     case 'ShiftRight':
-      if (!event?.repeat) {
+      if (!event.repeat) {
         instance.toggleShift();
       }
       break;
     case 'ControlLeft':
-      if (event?.altKey) {
+      if (event.altKey || instance.tempValue[0] === 'Alt') {
+        instance.tempValue = [];
         instance.toggleLayout();
       }
       break;
     case 'ControlRight':
-      if (event?.altKey) {
+      if (event.altKey || instance.tempValue[0] === 'Alt') {
+        instance.tempValue = [];
         instance.toggleLayout();
       }
       break;
@@ -93,12 +95,14 @@ export default function controller(char, key, keyController) {
       caretPosition(caretStart + 1, caretStart + 1);
       break;
     case 'AltRight':
-      if (event.ctrlKey) {
+      if (event.ctrlKey || instance.tempValue[0] === 'Ctrl') {
+        instance.tempValue = [];
         instance.toggleLayout();
       }
       break;
     case 'AltLeft':
-      if (event.ctrlKey) {
+      if (event.ctrlKey || instance.tempValue[0] === 'Ctrl') {
+        instance.tempValue = [];
         instance.toggleLayout();
       }
       break;
