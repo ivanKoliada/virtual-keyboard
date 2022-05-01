@@ -2,7 +2,7 @@ import keyLayoutRu from './layoutRu.js';
 
 import keyLayoutEng from './layoutEng.js';
 
-import eventsCase from './eventsCase.js';
+import controller from './controller.js';
 
 export default class Keyboard {
   constructor() {
@@ -121,10 +121,8 @@ export default class Keyboard {
         this.audio.currentTime = 0;
         this.audio.play();
         this.keyboardInput.focus();
-        const caretStart = this.keyboardInput.selectionStart;
-        const caretEnd = this.keyboardInput.selectionEnd;
 
-        eventsCase(char, button, this, caretStart, caretEnd);
+        controller(char, button, this);
       }
     });
     this.recognizer.addEventListener('audiostart', () => {
