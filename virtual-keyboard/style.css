@@ -55,6 +55,7 @@
 
 .keyboard__key:hover {
   cursor: pointer;
+  box-shadow: 0 0 10px #d3d9da;
 }
 
 .keyboard__key::before {
