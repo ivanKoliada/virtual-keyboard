@@ -8,15 +8,6 @@ if (!localStorage.lang) {
   localStorage.setItem('lang', 'ru');
 }
 
-function changeLayout(keyController) {
-  const keyClass = keyController;
-  keyClass.main.remove();
-  const valueLang = localStorage.getItem('lang') === 'ru' ? 'eng' : 'ru';
-  localStorage.setItem('lang', valueLang);
-  keyClass.createKeyboard();
-  keyClass.addEvents();
-}
-
 window.addEventListener('DOMContentLoaded', () => {
   keyboard.init();
 });
@@ -32,10 +23,6 @@ window.addEventListener('keydown', (event) => {
   const caretPosition = (start, end) => {
     keyboard.keyboardInput.setSelectionRange(start, end);
   };
-
-  if (event.ctrlKey && event.altKey) {
-    changeLayout(keyboard);
-  }
 
   if (event.ctrlKey && event.code === 'KeyX') {
     cutOrCopy = keyboard.keyboardInput.value.slice(caretStart, caretEnd);
