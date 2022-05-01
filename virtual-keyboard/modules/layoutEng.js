@@ -38,7 +38,7 @@ const keyLayoutEng = [
   { letter: 'k', subletter: '', keyCode: 'KeyK' },
   { letter: 'l', subletter: '', keyCode: 'KeyL' },
   { letter: ';', subletter: ':', keyCode: 'Semicolon' },
-  { letter: "'", subletter: '"', keyCode: 'Quote' },
+  { letter: "'", subletter: '&#34', keyCode: 'Quote' },
   { letter: '&#92;', subletter: '|', keyCode: 'Backslash' },
   { letter: 'Enter', subletter: '', keyCode: 'Enter' },
   { letter: 'Shift', subletter: '', keyCode: 'ShiftLeft' },
