@@ -74,12 +74,12 @@ export default function controller(char, key, keyController) {
       }
       break;
     case 'ControlLeft':
-      if (event.altKey) {
+      if (event?.altKey) {
         instance.toggleLayout();
       }
       break;
     case 'ControlRight':
-      if (event.altKey) {
+      if (event?.altKey) {
         instance.toggleLayout();
       }
       break;
@@ -109,15 +109,9 @@ export default function controller(char, key, keyController) {
       caretPosition(caretStart + 1, caretStart + 1);
       break;
     case 'ArrowUp':
-      // if (caretStart <= rowLength) {
-      //   caretPosition(0, 0);
-      // } else {
-      //   caretPosition(caretStart - rowLength, caretStart - rowLength);
-      // }
       window.getSelection().modify('move', 'left', 'paragraph');
       break;
     case 'ArrowDown':
-      // caretPosition(caretStart + rowLength, caretStart + rowLength);
       window.getSelection().modify('move', 'right', 'paragraph');
       break;
     case 'mic ':
