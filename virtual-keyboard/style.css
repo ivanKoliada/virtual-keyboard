@@ -11,7 +11,7 @@
   margin: 20px auto;
   padding: 10px;
   font-size: 16px;
-  min-height: 35vh;
+  height: 35vh;
   border-radius: 10px;
   background: #fff;
   outline: none;
@@ -93,7 +93,8 @@ span::after {
   padding: 0;
   justify-content: center;
   align-items: center;
-  color: rgba(22, 21, 21, 0.9);
+  /* color: rgba(22, 21, 21, 0.9); */
+  color: rgba(255, 255, 255, 0.7);
   font-weight: bold;
 }
 
@@ -113,7 +114,8 @@ span::after {
   padding: 0;
   justify-content: center;
   align-items: center;
-  color: rgba(22, 21, 21, 0.9);
+  /* color: rgba(22, 21, 21, 0.9); */
+  color: rgba(255, 255, 255, 0.7);
   font-weight: bold;
 }
 
@@ -170,7 +172,8 @@ span::after {
   justify-content: center;
   align-items: center;
   width: 34.5%;
-  color: rgba(22, 21, 21, 0.9);
+  /* color: rgba(22, 21, 21, 0.9); */
+  color: rgba(255, 255, 255, 0.7);
   font-weight: bold;
 }
 
@@ -184,15 +187,36 @@ span::after {
 }
 
 .keyboard__key--caps::after {
-  content: '\21EA';
+  /* content: '\21EA'; */
+  content: '\2686';
   position: absolute;
-  left: 12px;
-  color: rgba(240, 232, 232, 0.7);
+  top: 2px;
+  left: 62px;
+  /* color: rgba(240, 232, 232, 0.7); */
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.keyboard__key--shift {
+  box-shadow: 0 0 30px #d3d9da;
+}
+
+.keyboard__key--shift::after {
+  content: '\21EA';
+  /* content: '\2718'; */
+  /* content: '\27A7'; */
+  /* content: '\21EA'; */
+  /* content: '\2718'; */
+  /* content: '\27AE'; */
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  /* color: rgba(240, 232, 232, 0.7); */
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .instruction {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 20px;
   font-size: 16px;
   color: #d3d9da;
 }
@@ -201,7 +225,6 @@ span::after {
   position: relative;
   width: 15px;
   height: 15px;
-  color: rgba(22, 21, 21, 0.9);
   background: none;
 }
 
