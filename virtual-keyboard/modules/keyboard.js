@@ -79,7 +79,7 @@ export default class Keyboard {
     this.instruction.innerHTML = `<pre>
     The keyboard was created in the Windows.
     Desktop resolution only (>= 1024).
-    To change layout press alt + ctrl.
+    To change layout press alt + ctrl (with keyboard or mouse).
     </pre>`;
     document.body.append(this.instruction);
   }
@@ -94,7 +94,7 @@ export default class Keyboard {
       const insertLineBreak = ['Backspace', 'Delete', 'Enter', 'Shift '].indexOf(char) !== -1;
 
       if (char === 'mic' || char === 'mic ') {
-        fragment += `<button class="keyboard__key" data-code="${keyCode}"><span data-key="${subchar}"><svg id="microphone" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 512 512">
+        fragment += `<button class="keyboard__key" data-code="${keyCode}"><span data-key="${subchar}"><svg id="microphone" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 512 512" fill="#fff">
         <g>
           <g>
             <path d="m439.5,236c0-11.3-9.1-20.4-20.4-20.4s-20.4,9.1-20.4,20.4c0,70-64,126.9-142.7,126.9-78.7,0-142.7-56.9-142.7-126.9 0-11.3-9.1-20.4-20.4-20.4s-20.4,9.1-20.4,20.4c0,86.2 71.5,157.4 163.1,166.7v57.5h-23.6c-11.3,0-20.4,9.1-20.4,20.4 0,11.3 9.1,20.4 20.4,20.4h88c11.3,0 20.4-9.1 20.4-20.4 0-11.3-9.1-20.4-20.4-20.4h-23.6v-57.5c91.6-9.3 163.1-80.5 163.1-166.7z"/>
@@ -142,27 +142,36 @@ export default class Keyboard {
 
   toggleCapsLock() {
     this.capsLock = !this.capsLock;
-
-    for (const key of this.keys) {
+    this.keys.forEach((el) => {
+      const key = el;
       const value = key.textContent;
       if (value.length === 1) {
-        key.firstChild.innerHTML = this.capsLock ? value.toUpperCase() : value.toLowerCase();
+        if (this.capsLock && this.shift) {
+          key.firstChild.innerHTML = value.toLowerCase();
+        } else if (!this.capsLock && this.shift) {
+          key.firstChild.innerHTML = value.toUpperCase();
+        } else key.firstChild.innerHTML = this.capsLock ? value.toUpperCase() : value.toLowerCase();
       }
-    }
+    });
   }
 
   toggleShift() {
     this.shift = !this.shift;
 
-    for (const key of this.keys) {
+    this.keys.forEach((el) => {
+      const key = el;
       const inner = key.firstChild;
       const value = key.textContent;
       if (!inner.getAttribute('data-key') && value.length === 1) {
-        inner.innerHTML = this.shift ? value.toUpperCase() : value.toLowerCase();
+        if (this.capsLock && this.shift) {
+          inner.innerHTML = value.toLowerCase();
+        } else if (this.capsLock && !this.shift) {
+          inner.innerHTML = value.toUpperCase();
+        } else inner.innerHTML = this.shift ? value.toUpperCase() : value.toLowerCase();
       }
       if (inner.getAttribute('data-key') && value.length === 1) {
         [inner.textContent, inner.dataset.key] = [inner.dataset.key, inner.textContent];
       }
-    }
+    });
   }
 }
