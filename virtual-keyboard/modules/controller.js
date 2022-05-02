@@ -1,4 +1,4 @@
-export default function controller(char, key, keyController) {
+export default function controller(char, key, keyController, event) {
   const instance = keyController;
   const caretStart = instance.keyboardInput.selectionStart;
   const caretEnd = instance.keyboardInput.selectionEnd;
@@ -8,7 +8,7 @@ export default function controller(char, key, keyController) {
   instance.tempValue = instance.tempValue.slice(-1);
   instance.tempValue.push(key.textContent);
 
-  if (!event.repeat) {
+  if (!event?.repeat) {
     instance.audio.currentTime = 0;
     instance.audio.play();
   }
@@ -64,25 +64,41 @@ export default function controller(char, key, keyController) {
       caretPosition(caretStart + 1, caretStart + 1);
       break;
     case 'ShiftLeft':
-      if (!event.repeat) {
+      if (!event?.repeat) {
+        key.classList.toggle('keyboard__key--shift', !instance.shift);
         instance.toggleShift();
+        instance.keys.forEach((el) => {
+          if (el.textContent === 'Shift ') {
+            el.classList.remove('keyboard__key--shift');
+          }
+        });
       }
       break;
     case 'ShiftRight':
-      if (!event.repeat) {
+      if (!event?.repeat) {
+        key.classList.toggle('keyboard__key--shift', !instance.shift);
         instance.toggleShift();
+        instance.keys.forEach((el) => {
+          if (el.textContent === 'Shift') {
+            el.classList.remove('keyboard__key--shift');
+          }
+        });
       }
       break;
     case 'ControlLeft':
-      if (event.altKey || instance.tempValue[0] === 'Alt') {
+      if (event?.altKey || instance.tempValue[0] === 'Alt') {
         instance.tempValue = [];
-        instance.toggleLayout();
+        setTimeout(() => {
+          instance.toggleLayout();
+        }, 0);
       }
       break;
     case 'ControlRight':
-      if (event.altKey || instance.tempValue[0] === 'Alt') {
+      if (event?.altKey || instance.tempValue[0] === 'Alt') {
         instance.tempValue = [];
-        instance.toggleLayout();
+        setTimeout(() => {
+          instance.toggleLayout();
+        }, 0);
       }
       break;
     case 'MetaLeft':
@@ -95,15 +111,19 @@ export default function controller(char, key, keyController) {
       caretPosition(caretStart + 1, caretStart + 1);
       break;
     case 'AltRight':
-      if (event.ctrlKey || instance.tempValue[0] === 'Ctrl') {
+      if (event?.ctrlKey || instance.tempValue[0] === 'Ctrl') {
         instance.tempValue = [];
-        instance.toggleLayout();
+        setTimeout(() => {
+          instance.toggleLayout();
+        }, 0);
       }
       break;
     case 'AltLeft':
-      if (event.ctrlKey || instance.tempValue[0] === 'Ctrl') {
+      if (event?.ctrlKey || instance.tempValue[0] === 'Ctrl') {
         instance.tempValue = [];
-        instance.toggleLayout();
+        setTimeout(() => {
+          instance.toggleLayout();
+        }, 0);
       }
       break;
     case 'ArrowLeft':
@@ -128,7 +148,19 @@ export default function controller(char, key, keyController) {
       instance.recognizer.start();
       break;
     default:
-      if (event?.ctrlKey && event?.code === 'KeyX') {
+      if (instance.shift) {
+        instance.keyboardInput.value = `${instance.keyboardInput.value.slice(0, caretStart)}${
+          key.textContent
+        }${instance.keyboardInput.value.slice(caretEnd)}`;
+        caretPosition(caretStart + 1, caretStart + 1);
+        instance.keys.forEach((el) => {
+          if (el.textContent === 'Shift' || el.textContent === 'Shift ') {
+            el.classList.remove('keyboard__key--shift');
+          }
+        });
+        instance.toggleShift();
+        break;
+      } else if (event?.ctrlKey && event?.code === 'KeyX') {
         instance.copyText = instance.keyboardInput.value.slice(caretStart, caretEnd);
         instance.keyboardInput.value = `${instance.keyboardInput.value.slice(
           0,
@@ -154,6 +186,7 @@ export default function controller(char, key, keyController) {
           key.textContent
         }${instance.keyboardInput.value.slice(caretStart)}`;
         caretPosition(caretStart + 1, caretStart + 1);
+        break;
       } else {
         instance.keyboardInput.value = `${instance.keyboardInput.value.slice(0, caretStart)}${
           key.textContent

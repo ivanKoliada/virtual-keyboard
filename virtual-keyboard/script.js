@@ -17,7 +17,7 @@ window.addEventListener('keydown', (event) => {
     const char = key.getAttribute('data-code');
     if (event.code === char) {
       key.classList.add('keyboard__key--active');
-      controller(char, key, keyboard);
+      controller(char, key, keyboard, event);
     }
   });
 });
