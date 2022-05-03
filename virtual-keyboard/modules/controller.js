@@ -158,7 +158,9 @@ export default function controller(char, key, keyController, event) {
             el.classList.remove('keyboard__key--shift');
           }
         });
-        instance.toggleShift();
+        if (!event?.shiftKey) {
+          instance.toggleShift();
+        }
         break;
       } else if (event?.ctrlKey && event?.code === 'KeyX') {
         instance.copyText = instance.keyboardInput.value.slice(caretStart, caretEnd);

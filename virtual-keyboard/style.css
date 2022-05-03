@@ -93,7 +93,6 @@ span::after {
   padding: 0;
   justify-content: center;
   align-items: center;
-  /* color: rgba(22, 21, 21, 0.9); */
   color: rgba(255, 255, 255, 0.7);
   font-weight: bold;
 }
@@ -114,7 +113,6 @@ span::after {
   padding: 0;
   justify-content: center;
   align-items: center;
-  /* color: rgba(22, 21, 21, 0.9); */
   color: rgba(255, 255, 255, 0.7);
   font-weight: bold;
 }
@@ -172,7 +170,6 @@ span::after {
   justify-content: center;
   align-items: center;
   width: 34.5%;
-  /* color: rgba(22, 21, 21, 0.9); */
   color: rgba(255, 255, 255, 0.7);
   font-weight: bold;
 }
@@ -186,32 +183,8 @@ span::after {
   box-shadow: 0 0 30px #d3d9da;
 }
 
-.keyboard__key--caps::after {
-  /* content: '\21EA'; */
-  content: '\26AC';
-  position: absolute;
-  top: 5px;
-  left: 65px;
-  /* color: rgba(240, 232, 232, 0.7); */
-  color: rgba(255, 255, 255, 0.7);
-}
-
 .keyboard__key--shift {
   box-shadow: 0 0 30px #d3d9da;
-}
-
-.keyboard__key--shift::after {
-  content: '\21EA';
-  /* content: '\2718'; */
-  /* content: '\27A7'; */
-  /* content: '\21EA'; */
-  /* content: '\2718'; */
-  /* content: '\27AE'; */
-  position: absolute;
-  top: 18px;
-  left: 20px;
-  /* color: rgba(240, 232, 232, 0.7); */
-  color: rgba(255, 255, 255, 0.7);
 }
 
 .instruction {

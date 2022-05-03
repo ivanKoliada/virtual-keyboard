@@ -77,9 +77,9 @@ export default class Keyboard {
     this.instruction = document.createElement('div');
     this.instruction.classList.add('instruction');
     this.instruction.innerHTML = `<pre>
-    The keyboard was created in the Windows.
+    The keyboard has been created in the Windows.
     Desktop resolution only (>= 1024).
-    To change layout press alt + ctrl (with keyboard or mouse).
+    To change layout press alt + ctrl (via keyboard or mouse).
     </pre>`;
     document.body.append(this.instruction);
   }
@@ -115,12 +115,12 @@ export default class Keyboard {
 
   addEvents() {
     this.microphone = document.getElementById('microphone');
-    this.keyboardContainer.addEventListener('click', ({ target }) => {
-      const button = target.closest('.keyboard__key');
+    this.keyboardContainer.addEventListener('click', (event) => {
+      const button = event.target.closest('.keyboard__key');
       if (button) {
         const char = button.getAttribute('data-code');
 
-        controller(char, button, this);
+        controller(char, button, this, event);
       }
     });
     this.recognizer.addEventListener('audiostart', () => {
