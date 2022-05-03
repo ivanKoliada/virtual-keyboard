@@ -26,6 +26,11 @@ window.addEventListener('keyup', (event) => {
   event.preventDefault();
   if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
     keyboard.toggleShift();
+    keyboard.keys.forEach((el) => {
+      if (el.textContent === 'Shift' || el.textContent === 'Shift ') {
+        el.classList.remove('keyboard__key--shift');
+      }
+    });
   }
   keyboard.keys.forEach((key) => {
     const char = key.getAttribute('data-code');
