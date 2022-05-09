@@ -15,6 +15,7 @@
   border-radius: 10px;
   background: #fff;
   outline: none;
+  tab-size: 4;
 }
 
 .keyboard {

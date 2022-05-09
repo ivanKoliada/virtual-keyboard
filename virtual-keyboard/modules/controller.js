@@ -34,8 +34,8 @@ export default function controller(char, key, keyController, event) {
       instance.keyboardInput.value = `${instance.keyboardInput.value.slice(
         0,
         caretStart,
-      )}    ${instance.keyboardInput.value.slice(caretStart)}`;
-      caretPosition(caretStart + 4, caretStart + 4);
+      )}\t${instance.keyboardInput.value.slice(caretStart)}`;
+      caretPosition(caretStart + 1, caretStart + 1);
       break;
     case 'Delete':
       if (caretStart === caretEnd) {
